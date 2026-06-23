@@ -1,0 +1,4 @@
+- create a env 
+- pip install -r requirements.txt
+- python shcnndata.py
+- python vis.py --frame={frame_no.}
