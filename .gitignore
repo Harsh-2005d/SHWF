@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+*.h5
+dataset/
+*.npy
+*.bmp
+*.mat
+*.png
+*.jpg
+*.gif
+*.cache
+*.engine
+build/
+.vscode/
