@@ -1,0 +1,11 @@
+{
+  "model": "svd_pseudoinverse_matrix_reconstructor",
+  "formula": "s = A phi, phi_hat = A_plus s",
+  "rcond": 1e-06,
+  "n_slopes": 224,
+  "n_modes": 100,
+  "source_file": "Sum_NewData_299_100.h5",
+  "frames": 1000,
+  "test_fraction": 0.2,
+  "seed": 42
+}
