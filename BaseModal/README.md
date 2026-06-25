@@ -35,15 +35,17 @@ Generate data first from the project root:
 python shcnndata.py
 ```
 
-Train the base matrix model:
+Train the upgraded matrix model:
 
 ```bash
-python -m BaseModal.train --file Sum_NewData_299_100.h5 --modes 100
+python -m BaseModal.train --file Sum_NewData_299_5000.h5 --modes 100
 ```
 
-The generated dataset has 224 slope measurements and 299 Zernike coefficients.
-A classical matrix reconstructor should start with fewer low-order modes than
-the number of slope measurements. `--modes 100` is a stable first baseline.
+The upgraded model standardizes the 224 slope measurements, selects a
+Tikhonov regularization strength on a calibration split, and directly fits the
+modal reconstruction matrix with SVD. Prediction is still a fast matrix
+multiplication. A classical reconstructor should start with fewer low-order
+modes than slope measurements; `--modes 100` is a stable first baseline.
 
 Predict one frame:
 
@@ -57,14 +59,29 @@ Visualize reconstruction:
 python -m BaseModal.visualize_prediction --file Sum_NewData_299_100.h5 --frame 0
 ```
 
+The newer four-panel pupil-masked visualization is:
+
+```bash
+python -m BaseModal.plot_reconstruction --file Sum_NewData_299_5000.h5 --frame 0
+```
+
 Evaluate metrics over the dataset:
 
 ```bash
 python -m BaseModal.evaluate --file Sum_NewData_299_100.h5
 ```
 
+For held-out per-frame CSV metrics and an aggregate JSON report:
+
+```bash
+python -m BaseModal.benchmark --file Sum_NewData_299_5000.h5
+```
+
 The trained model is saved by default at:
 
 ```text
-BaseModal/artifacts/matrix_reconstructor.npz
+BaseModal/artifacts/matrix_reconstructor_v2.npz
 ```
+
+The original `matrix_reconstructor.npz` is retained as the legacy
+double-pseudoinverse baseline.
