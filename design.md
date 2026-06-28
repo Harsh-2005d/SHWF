@@ -10,7 +10,7 @@ The core architecture features a lightweight 1D Linear Transformer utilizing a 3
 
 The pipeline then branches into critical real-time operations:
 *   **Turbulence Characterization:** The Fried parameter ($r_0$) and coherence time ($\tau_0$) are analytically inferred directly from the time-series of the predicted Zernike coefficients [2].
-*   **Temporal Prediction (Servo-Lag Mitigation):** To eliminate time-delay errors inherent in AO loops, a lightweight **Vector Auto-Regressive (VAR)** model operating in pure C++ predicts the future state of the Zernike coefficients based on the Frozen Flow Hypothesis, anticipating the wavefront before it reaches the mirror.
+*   **Temporal Prediction:** To eliminate time-delay errors inherent in AO loops, a lightweight **Vector Auto-Regressive (VAR)** model operating in pure C++ predicts the future state of the Zernike coefficients based on the Frozen Flow Hypothesis, anticipating the wavefront before it reaches the mirror.
 *   **Non-Linear Actuator Mapping:** The predicted Zernike coefficients are spatially resampled and fed into a pre-trained **Multivariate Adaptive Regression Splines (MARS)** model [3]. This correctly maps the conjugate wavefront to the Deformable Mirror (DM) actuator voltages, natively handling non-linear hysteresis and inter-actuator cross-coupling in a Fried geometry.
 
 ## 2. Unique Selling Proposition (USP)
